@@ -3,7 +3,8 @@ package com.example.beautysalonfx.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 
 public class InfoViewController {
 
@@ -14,26 +15,26 @@ public class InfoViewController {
     private URL location;
 
     @FXML
-    private Label ListRecords_label;
+    private Button createRecord_button;
 
     @FXML
-    private Label aboutUs_label;
+    private Button listRecords_button;
 
     @FXML
-    private Label createRecord_label;
+    private Button masters_button;
 
     @FXML
-    private Label masters_label;
+    private Button schedule_button;
 
     @FXML
-    private Label schedule_label;
+    private Button services_button;
 
     @FXML
-    private Label services_label;
+    private TextArea textarea;
 
     @FXML
     void initialize() {
-
+//        textarea.setStyle("-fx-control-inner-background: black;");
     }
 
 }
