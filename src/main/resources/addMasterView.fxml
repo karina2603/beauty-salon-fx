@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beautysalonfx.controller.AddMasterViewController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #64485C;">
+         <children>
+            <AnchorPane layoutY="100.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: #83677B;">
+               <children>
+                  <AnchorPane prefHeight="300.0" prefWidth="220.0" style="-fx-background-color: #2E1114;">
+                     <children>
+                        <Label layoutX="24.0" layoutY="14.0" text="Actions:" textFill="WHITE" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="addRecord_button" layoutX="24.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="Add record" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="24.0" layoutY="85.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="Add master" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="addService_button" layoutX="23.0" layoutY="124.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="Add service" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="seeListUsers_button" layoutX="23.0" layoutY="163.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="See list of users" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="403.0" layoutY="14.0" text="Add master:" textFill="WHITE" underline="true">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="services_list" layoutX="413.0" layoutY="144.0" prefHeight="25.0" prefWidth="174.0" />
+                  <Label layoutX="269.0" layoutY="144.0" text="Name of service:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="269.0" layoutY="108.0" text="Name of master:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="masters_list" layoutX="413.0" layoutY="108.0" prefHeight="25.0" prefWidth="174.0" />
+                  <Button fx:id="addMaster_button" layoutX="386.0" layoutY="223.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Add new master" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Label layoutX="40.0" layoutY="14.0" text="WhiteSquare" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Gabriola" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="482.0" layoutY="14.0" text="Information:" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="aboutUs_button" layoutX="337.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="About us" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="427.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Schedule" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="schedule_button" layoutX="421.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Schedule" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="services_button" layoutX="502.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="masters_button" layoutX="578.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Masters" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="337.0" layoutY="65.0" prefHeight="9.0" prefWidth="305.0" style="-fx-background-color: #2E1114;" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

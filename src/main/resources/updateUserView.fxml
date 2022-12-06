@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beautysalonfx.controller.UpdateUserViewController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #64485C;">
+         <children>
+            <AnchorPane layoutY="100.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: #83677B;">
+               <children>
+                  <AnchorPane prefHeight="300.0" prefWidth="220.0" style="-fx-background-color: #2E1114;">
+                     <children>
+                        <Label layoutX="24.0" layoutY="14.0" text="Actions:" textFill="WHITE" underline="true">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="addRecord_button" layoutX="24.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="Add record" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="addMaster_button" layoutX="24.0" layoutY="85.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="Add master" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="addService_button" layoutX="23.0" layoutY="124.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="Add service" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="seeListUsers_button" layoutX="23.0" layoutY="163.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="See list of users" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="403.0" layoutY="14.0" text="List of users:" textFill="WHITE" underline="true">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="updateUser_button" layoutX="422.0" layoutY="237.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="273.0" layoutY="64.0" text="Name:" textFill="#fcfcfc">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="name_field" editable="false" layoutX="403.0" layoutY="65.0" promptText="Name of user" />
+                  <Label layoutX="273.0" layoutY="106.0" text="Role:" textFill="#fcfcfc">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="150.0" text="Enabled:" textFill="#fcfcfc">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="role_field" layoutX="403.0" layoutY="107.0" promptText="Role" />
+                  <TextField fx:id="enabled_field" layoutX="403.0" layoutY="151.0" promptText="Enabled" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="40.0" layoutY="14.0" text="WhiteSquare" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Gabriola" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="482.0" layoutY="14.0" text="Information:" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="aboutUs_button" layoutX="337.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="About us" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="427.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Schedule" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="schedule_button" layoutX="421.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Schedule" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="services_button" layoutX="502.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="masters_button" layoutX="578.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Masters" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="337.0" layoutY="65.0" prefHeight="9.0" prefWidth="305.0" style="-fx-background-color: #2E1114;" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
