@@ -1,8 +1,13 @@
 package com.example.beautysalonfx.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.beautysalonfx.configuration.SceneHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 public class ServicesViewController {
@@ -30,12 +35,57 @@ public class ServicesViewController {
 
     @FXML
     void initialize() {
-        assert aboutUs_button != null : "fx:id=\"aboutUs_button\" was not injected: check your FXML file 'servicesView.fxml'.";
-        assert createRecord_button != null : "fx:id=\"createRecord_button\" was not injected: check your FXML file 'servicesView.fxml'.";
-        assert listRecords_button != null : "fx:id=\"listRecords_button\" was not injected: check your FXML file 'servicesView.fxml'.";
-        assert masters_button != null : "fx:id=\"masters_button\" was not injected: check your FXML file 'servicesView.fxml'.";
-        assert schedule_button != null : "fx:id=\"schedule_button\" was not injected: check your FXML file 'servicesView.fxml'.";
 
+        aboutUs_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/infoView.fxml", aboutUs_button);
+        });
+
+        schedule_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/scheduleView.fxml", schedule_button);
+        });
+
+        masters_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/mastersView.fxml", masters_button);
+        });
+
+        createRecord_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/createRecordView.fxml", createRecord_button);
+        });
+
+        listRecords_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", listRecords_button);
+        });
     }
+
+//    private void openNewScene(String window, Button button) {
+//        //button.getScene().getWindow().hide();
+//
+//
+//        URL fxmlLocation = getClass().getResource(window);
+//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
+////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
+//
+//        try {
+//            loader.load();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        Parent root = loader.getRoot();
+////        Stage stage = new Stage();
+////        stage.setScene(new Scene(root));
+////        stage.showAndWait();
+//        button.getScene().setRoot(root);
+//    }
 
 }

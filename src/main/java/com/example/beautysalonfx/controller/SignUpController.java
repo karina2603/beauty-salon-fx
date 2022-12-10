@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.animations.Shake;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +63,9 @@ public class SignUpController {
             User user = new User(username, password, confirmPassword);
 
             dbHandler.signUpUser(user);
-            openNewScene("/infoView.fxml");
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/infoView.fxml", signUp_button);
 
         } else {
             Shake userPassAnim = new Shake(password_field);
@@ -72,23 +75,23 @@ public class SignUpController {
         }
     }
 
-    private void openNewScene(String window) {
-        signUp_button.getScene().getWindow().hide();
-
-
-        URL fxmlLocation = getClass().getResource(window);
-        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-//            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-    }
+//    private void openNewScene(String window) {
+//        signUp_button.getScene().getWindow().hide();
+//
+//
+//        URL fxmlLocation = getClass().getResource(window);
+//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
+////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
+//
+//        try {
+//            loader.load();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        Parent root = loader.getRoot();
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(root));
+//        stage.showAndWait();
+//    }
 }

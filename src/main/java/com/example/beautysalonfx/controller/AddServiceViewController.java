@@ -2,6 +2,8 @@ package com.example.beautysalonfx.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.beautysalonfx.configuration.SceneHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -53,19 +55,23 @@ public class AddServiceViewController {
 
     @FXML
     void initialize() {
-        assert aboutUs_button != null : "fx:id=\"aboutUs_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert addMaster_button != null : "fx:id=\"addMaster_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert addRecord_button != null : "fx:id=\"addRecord_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert addService_button != null : "fx:id=\"addService_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert cost_field != null : "fx:id=\"cost_field\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert masters_button != null : "fx:id=\"masters_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert masters_list != null : "fx:id=\"masters_list\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert requestRime_field != null : "fx:id=\"requestRime_field\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert schedule_button != null : "fx:id=\"schedule_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert seeListUsers_button != null : "fx:id=\"seeListUsers_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert services_button != null : "fx:id=\"services_button\" was not injected: check your FXML file 'addServiceView.fxml'.";
-        assert services_list != null : "fx:id=\"services_list\" was not injected: check your FXML file 'addServiceView.fxml'.";
+        addMaster_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
 
+            sceneHandler.openNewScene("/addMasterView.fxml", addMaster_button);
+        });
+
+        addRecord_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/addRecordView.fxml", addRecord_button);
+        });
+
+        seeListUsers_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("listUsersView.fxml", seeListUsers_button);
+        });
     }
 
 }

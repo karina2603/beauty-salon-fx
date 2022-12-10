@@ -2,7 +2,14 @@ package com.example.beautysalonfx.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import com.example.beautysalonfx.animations.Shake;
+import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.SceneHandler;
+import com.example.beautysalonfx.entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,35 +47,74 @@ public class HelloController {
             String passwordText = password_field.getText().trim();
 
             if(!loginText.equals("") && !passwordText.equals("")) {
-                loginUser(loginText, passwordText);
+                try {
+                    loginUser(loginText, passwordText);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         signUp_button.setOnAction(event -> {
-            openNewScene("/signUp.fxml");
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/signUp.fxml", signUp_button);
         });
     }
 
-    private void openNewScene(String window) {
-        signUp_button.getScene().getWindow().hide();
+//    private void openNewScene(String window) {
+//        //signUp_button.getScene().getWindow().hide();
+//
+//
+//        URL fxmlLocation = getClass().getResource(window);
+//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
+////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
+//
+//        try {
+//            loader.load();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        Parent root = loader.getRoot();
+////        Stage stage = new Stage();
+////        stage.setScene(new Scene(root));
+////        stage.showAndWait();
+//        signUp_button.getScene().setRoot(root);
+//    }
 
+    private void loginUser(String loginText, String passwordText) throws SQLException, ClassNotFoundException {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        User user = new User();
+        user.setLogin(loginText);
+        user.setPassword(passwordText);
 
-        URL fxmlLocation = getClass().getResource(window);
-        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-//            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
+        ResultSet result = dbHandler.getUser(user);
 
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        int counter = 0;
+        while (result.next()) {
+            counter++;
+            user.setRole(result.getString("role"));
+            break;
         }
 
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-    }
+        if (counter > 0) {
+            if (user.getRole().equals("user")) {
+                SceneHandler sceneHandler = new SceneHandler();
 
-    private void loginUser(String loginText, String passwordText) {
+                sceneHandler.openNewScene("/infoView.fxml", signIn_button);
+            } else if (user.getRole().equals("admin")) {
+                SceneHandler sceneHandler = new SceneHandler();
+
+                sceneHandler.openNewScene("/adminView.fxml", signIn_button);
+            }
+        } else {
+            Shake userLoginAnim = new Shake(login_field);
+            Shake userPassAnim = new Shake(password_field);
+            userLoginAnim.playAnim();
+            userPassAnim.playAnim();
+        }
     }
 
 }
