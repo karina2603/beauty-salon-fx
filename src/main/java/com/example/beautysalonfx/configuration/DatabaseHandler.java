@@ -1,6 +1,9 @@
 package com.example.beautysalonfx.configuration;
 
+import com.example.beautysalonfx.entity.Service;
 import com.example.beautysalonfx.entity.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -49,5 +52,30 @@ public class DatabaseHandler extends Configs{
         resSet = prSt.executeQuery();
 
         return resSet;
+    }
+
+    public ObservableList<Service> getServices() throws Exception {
+        try {
+            Connection conn = getDbConnection();
+            PreparedStatement statement = conn.prepareStatement("" +
+                    "SELECT * FROM Services ");
+            ResultSet result = statement.executeQuery();
+
+            ObservableList<Service> list = FXCollections.observableArrayList();
+            while (result.next()) {
+                Service service = new Service();
+                service.setId_service(result.getInt("id_service"));
+                service.setName(result.getString("name"));
+                service.setRequest_time(result.getDouble("request_time"));
+                service.setCost(result.getInt("cost"));
+
+                list.add(service);
+            }
+            return list;
+
+        } catch (Exception e)  {
+
+        }
+        return null;
     }
 }

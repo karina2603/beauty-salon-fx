@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Service {
 
-    private int ID_service;
+    private int id_service;
     private String name;
     private double request_time;
     private int cost;
@@ -27,12 +27,12 @@ public class Service {
     public Service() {
     }
 
-    public int getID_service() {
-        return ID_service;
+    public int getId_service() {
+        return id_service;
     }
 
-    public void setID_service(int ID_service) {
-        this.ID_service = ID_service;
+    public void setId_service(int id_service) {
+        this.id_service = id_service;
     }
 
     public String getName() {
@@ -72,11 +72,11 @@ public class Service {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return ID_service == service.ID_service && request_time == service.request_time && cost == service.cost && name == service.name;
+        return id_service == service.id_service && request_time == service.request_time && cost == service.cost && name == service.name;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID_service, name, request_time, cost);
+        return Objects.hash(id_service, name, request_time, cost);
     }
 }

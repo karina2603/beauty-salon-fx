@@ -32,12 +32,12 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <TableView layoutX="233.0" layoutY="45.0" prefHeight="247.0" prefWidth="461.0">
+                  <TableView fx:id="tableServices" layoutX="233.0" layoutY="45.0" prefHeight="247.0" prefWidth="461.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="ID" />
-                      <TableColumn prefWidth="156.0" text="Name " />
-                        <TableColumn prefWidth="120.0" text="Request time" />
-                        <TableColumn prefWidth="109.0" text="Cost" />
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="nameColumn" prefWidth="156.0" text="Name " />
+                        <TableColumn fx:id="request_timeColumn" prefWidth="120.0" text="Request time" />
+                        <TableColumn fx:id="costColumn" prefWidth="109.0" text="Cost" />
                     </columns>
                   </TableView>
                   <Label layoutX="430.0" layoutY="7.0" text="Services:" textFill="#eeeeee" underline="true">

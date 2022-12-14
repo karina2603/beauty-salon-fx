@@ -1,16 +1,23 @@
 package com.example.beautysalonfx.controller;
 
-import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
+import com.example.beautysalonfx.configuration.DatabaseHandler;
 import com.example.beautysalonfx.configuration.SceneHandler;
+import com.example.beautysalonfx.entity.Service;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ServicesViewController {
+
+    private ObservableList<Service> servicesData = FXCollections.observableArrayList();
 
     @FXML
     private ResourceBundle resources;
@@ -22,7 +29,13 @@ public class ServicesViewController {
     private Button aboutUs_button;
 
     @FXML
+    private TableColumn<Service, Integer> costColumn;
+
+    @FXML
     private Button createRecord_button;
+
+    @FXML
+    private TableColumn<Service, Integer> idColumn;
 
     @FXML
     private Button listRecords_button;
@@ -31,10 +44,33 @@ public class ServicesViewController {
     private Button masters_button;
 
     @FXML
+    private TableColumn<Service, String> nameColumn;
+
+    @FXML
+    private TableColumn<Service, Double> request_timeColumn;
+
+    @FXML
     private Button schedule_button;
 
     @FXML
+    private TableView<Service> tableServices;
+
+    @FXML
     void initialize() {
+
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        try {
+            servicesData = databaseHandler.getServices();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<Service, Integer>("id_service"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Service, String>("name"));
+        request_timeColumn.setCellValueFactory(new PropertyValueFactory<Service, Double>("request_time"));
+        costColumn.setCellValueFactory(new PropertyValueFactory<Service, Integer>("cost"));
+
+        tableServices.setItems(servicesData);
 
         aboutUs_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
@@ -66,6 +102,8 @@ public class ServicesViewController {
             sceneHandler.openNewScene("/listRecordsView.fxml", listRecords_button);
         });
     }
+
+
 
 //    private void openNewScene(String window, Button button) {
 //        //button.getScene().getWindow().hide();
