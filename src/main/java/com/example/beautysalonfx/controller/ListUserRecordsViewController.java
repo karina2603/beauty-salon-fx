@@ -1,22 +1,21 @@
 package com.example.beautysalonfx.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import com.example.beautysalonfx.configuration.Const;
+import com.example.beautysalonfx.configuration.DatabaseHandler;
 import com.example.beautysalonfx.configuration.SceneHandler;
+import com.example.beautysalonfx.entity.Master;
+import com.example.beautysalonfx.entity.Record;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ListRecordsViewController {
+public class ListUserRecordsViewController {
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+    private ObservableList<Record> recordsData = FXCollections.observableArrayList();
 
     @FXML
     private Button aboutUs_button;
@@ -25,7 +24,19 @@ public class ListRecordsViewController {
     private Button createRecord_button;
 
     @FXML
+    private TableColumn<Record, String> dateColumn;
+
+    @FXML
+    private TableColumn<Record, Integer> idColumn;
+
+    @FXML
     private Button masters_button;
+
+    @FXML
+    private TableColumn<Record, String> nameColumn;
+
+    @FXML
+    private TableColumn<Record, String> name_masterColumn;
 
     @FXML
     private Button schedule_button;
@@ -34,7 +45,30 @@ public class ListRecordsViewController {
     private Button services_button;
 
     @FXML
+    private TableView<Record> tableUserRecords;
+
+    @FXML
+    private TableColumn<Record, String> timeColumn;
+
+    @FXML
     void initialize() {
+
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        try {
+
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            recordsData = databaseHandler.getUserRecords(Const.USER_ID);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id_record"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("service_name"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        name_masterColumn.setCellValueFactory(new PropertyValueFactory<>("master_name"));
+
+        tableUserRecords.setItems(recordsData);
 
         aboutUs_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();

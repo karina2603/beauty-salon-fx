@@ -17,7 +17,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Button fx:id="listRecords_button" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="List of previous records" textFill="WHITE">
+                  <Button fx:id="listRecords_button" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="List of records" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

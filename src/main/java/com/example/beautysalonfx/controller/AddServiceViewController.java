@@ -18,9 +18,6 @@ public class AddServiceViewController {
     private URL location;
 
     @FXML
-    private Button aboutUs_button;
-
-    @FXML
     private Button addMaster_button;
 
     @FXML
@@ -39,19 +36,14 @@ public class AddServiceViewController {
     private ComboBox<?> masters_list;
 
     @FXML
-    private TextField requestRime_field;
+    private TextField nameService_field;
 
     @FXML
-    private Button schedule_button;
+    private TextField requestRime_field;
 
     @FXML
     private Button seeListUsers_button;
 
-    @FXML
-    private Button services_button;
-
-    @FXML
-    private ComboBox<?> services_list;
 
     @FXML
     void initialize() {

@@ -67,7 +67,7 @@ public class ScheduleViewController {
         listRecords_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
-            sceneHandler.openNewScene("/listRecordsView.fxml", listRecords_button);
+            sceneHandler.openNewScene("/listUserRecordsView.fxml", listRecords_button);
         });
     }
 

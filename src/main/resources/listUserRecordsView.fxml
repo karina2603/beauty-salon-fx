@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beautysalonfx.controller.ListRecordsViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beautysalonfx.controller.ListUserRecordsViewController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #64485C;">
          <children>
@@ -20,7 +20,7 @@
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Button layoutX="14.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="List of previous records" textFill="WHITE">
+                        <Button layoutX="14.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="List of records" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -32,13 +32,13 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <TableView layoutX="233.0" layoutY="45.0" prefHeight="247.0" prefWidth="461.0">
+                  <TableView fx:id="tableUserRecords" layoutX="233.0" layoutY="45.0" prefHeight="247.0" prefWidth="461.0">
                      <columns>
-                        <TableColumn prefWidth="51.0" text="ID" />
-                        <TableColumn prefWidth="114.0" text="Name " />
-                        <TableColumn prefWidth="97.0" text="Request time" />
-                        <TableColumn prefWidth="75.0" text="Cost" />
-                        <TableColumn prefWidth="123.0" text="Name of master" />
+                        <TableColumn fx:id="idColumn" prefWidth="51.0" text="ID" />
+                        <TableColumn fx:id="nameColumn" prefWidth="114.0" text="Name " />
+                        <TableColumn fx:id="timeColumn" prefWidth="97.0" text="Time" />
+                        <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
+                        <TableColumn fx:id="name_masterColumn" prefWidth="123.0" text="Name of master" />
                      </columns>
                   </TableView>
                   <Label layoutX="369.0" layoutY="7.0" text="List of previous records:" textFill="#eeeeee" underline="true">

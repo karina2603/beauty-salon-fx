@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.animations.Shake;
+import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.User;
@@ -96,6 +97,7 @@ public class HelloController {
         while (result.next()) {
             counter++;
             user.setRole(result.getString("role"));
+            Const user_id = new Const(result.getInt("id"), "user");
             break;
         }
 

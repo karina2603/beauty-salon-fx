@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beautysalonfx.controller.ServicesViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beautysalonfx.controller.ChoiceRecordViewController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #64485C;">
          <children>
@@ -32,19 +32,25 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="tableServices" layoutX="233.0" layoutY="45.0" prefHeight="247.0" prefWidth="461.0">
-                    <columns>
-                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
-                      <TableColumn fx:id="nameColumn" prefWidth="156.0" text="Name " />
-                        <TableColumn fx:id="request_timeColumn" prefWidth="120.0" text="Request time" />
-                        <TableColumn fx:id="costColumn" prefWidth="109.0" text="Cost" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="430.0" layoutY="7.0" text="Services:" textFill="#eeeeee" underline="true">
+                  <Label layoutX="387.0" layoutY="7.0" text="Choose record:" textFill="#eeeeee" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Button fx:id="addRecord_button" layoutX="390.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Add record" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="tableRecords" layoutX="234.0" layoutY="41.0" prefHeight="209.0" prefWidth="457.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="91.0" text="ID" />
+                      <TableColumn fx:id="nameColumn" prefWidth="111.0" text="Name" />
+                      <TableColumn fx:id="dateColumn" prefWidth="141.0" text="Date" />
+                        <TableColumn fx:id="timeColumn" prefWidth="137.0" text="Time" />
+                        <TableColumn fx:id="name_masterColumn" prefWidth="51.0" text="Name of master" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
             <Label layoutX="40.0" layoutY="14.0" text="WhiteSquare" textFill="WHITE" underline="true">
@@ -72,7 +78,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="502.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="Services" textFill="WHITE" underline="true">
+            <Button fx:id="services_button" layoutX="502.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
                <font>
                   <Font size="14.0" />
                </font>

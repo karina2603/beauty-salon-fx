@@ -18,9 +18,6 @@ public class AddRecordViewController {
     private URL location;
 
     @FXML
-    private Button aboutUs_button;
-
-    @FXML
     private Button addMaster_button;
 
     @FXML
@@ -37,9 +34,6 @@ public class AddRecordViewController {
 
     @FXML
     private ComboBox<?> masters_list;
-
-    @FXML
-    private Button schedule_button;
 
     @FXML
     private Button seeListUsers_button;

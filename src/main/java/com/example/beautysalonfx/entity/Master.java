@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Master {
-    private int ID_master;
+    private int id_master;
     private String name;
     private List<Service> services;
 
@@ -26,12 +26,12 @@ public class Master {
     public Master() {
     }
 
-    public int getID_master() {
-        return ID_master;
+    public int getId_master() {
+        return id_master;
     }
 
-    public void setID_master(int ID_master) {
-        this.ID_master = ID_master;
+    public void setId_master(int id_master) {
+        this.id_master = id_master;
     }
 
     public String getName() {
@@ -55,11 +55,11 @@ public class Master {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Master master = (Master) o;
-        return ID_master == master.ID_master && Objects.equals(name, master.name) && Objects.equals(services, master.services);
+        return id_master == master.id_master && Objects.equals(name, master.name) && Objects.equals(services, master.services);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID_master, name, services);
+        return Objects.hash(id_master, name, services);
     }
 }

@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Record {
 
-    private int ID_record;
-    private Service service;
-    private Master master;
+    private int id_record;
+    private String service_name;
+    private String master_name;
     private User user;
     private String date;
     private String time;
@@ -20,9 +20,9 @@ public class Record {
         this.user = user;
     }
 
-    public Record(Service service, Master master, String date, String time) {
-        this.service = service;
-        this.master = master;
+    public Record(String service, String master_name, String date, String time) {
+        this.service_name = service;
+        this.master_name = master_name;
         this.date = date;
         this.time = time;
         this.status = Status.Free;
@@ -31,28 +31,28 @@ public class Record {
     public Record() {
     }
 
-    public int getID_record() {
-        return ID_record;
+    public int getId_record() {
+        return id_record;
     }
 
-    public void setID_record(int ID_record) {
-        this.ID_record = ID_record;
+    public void setId_record(int id_record) {
+        this.id_record = id_record;
     }
 
-    public Service getService() {
-        return service;
+    public String getService_name() {
+        return service_name;
     }
 
-    public void setService(Service ID_service) {
-        this.service = ID_service;
+    public void setService_name(String service_name) {
+        this.service_name = service_name;
     }
 
-    public Master getMaster() {
-        return master;
+    public String getMaster_name() {
+        return master_name;
     }
 
-    public void setMaster(Master master) {
-        this.master = master;
+    public void setMaster_name(String master_name) {
+        this.master_name = master_name;
     }
 
     public String getDate() {
@@ -76,11 +76,11 @@ public class Record {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Record record = (Record) o;
-        return ID_record == record.ID_record && service == record.service && master == record.master && Objects.equals(date, record.date) && Objects.equals(time, record.time);
+        return id_record == record.id_record && service_name == record.service_name && master_name == record.master_name && Objects.equals(date, record.date) && Objects.equals(time, record.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID_record, service, master, date, time);
+        return Objects.hash(id_record, service_name, master_name, date, time);
     }
 }

@@ -7,6 +7,7 @@ import com.example.beautysalonfx.configuration.SceneHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 public class AddMasterViewController {
 
@@ -17,7 +18,7 @@ public class AddMasterViewController {
     private URL location;
 
     @FXML
-    private Button aboutUs_button;
+    private Button addMaster_button;
 
     @FXML
     private Button addRecord_button;
@@ -26,13 +27,7 @@ public class AddMasterViewController {
     private Button addService_button;
 
     @FXML
-    private Button masters_button;
-
-    @FXML
-    private ComboBox<?> masters_list;
-
-    @FXML
-    private Button schedule_button;
+    private TextField name_field;
 
     @FXML
     private Button seeListUsers_button;

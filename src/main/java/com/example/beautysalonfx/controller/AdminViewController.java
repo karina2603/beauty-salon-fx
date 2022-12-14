@@ -62,7 +62,7 @@ public class AdminViewController {
         seeListUsers_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
-            sceneHandler.openNewScene("listUsersView.fxml", seeListUsers_button);
+            sceneHandler.openNewScene("/listUsersView.fxml", seeListUsers_button);
         });
     }
 

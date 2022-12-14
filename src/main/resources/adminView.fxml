@@ -33,11 +33,6 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="seeListUsers_button" layoutX="23.0" layoutY="163.0" mnemonicParsing="false" style="-fx-background-color: #2E1114;" text="See list of users" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
                      </children>
                   </AnchorPane>
                </children>
@@ -52,22 +47,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="aboutUs_button" layoutX="337.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="About us" textFill="WHITE" underline="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="427.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Schedule" textFill="WHITE" underline="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="schedule_button" layoutX="421.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Schedule" textFill="WHITE" underline="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="services_button" layoutX="502.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
+            <Button fx:id="services_button" layoutX="448.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -77,7 +57,12 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <AnchorPane layoutX="337.0" layoutY="65.0" prefHeight="9.0" prefWidth="305.0" style="-fx-background-color: #2E1114;" />
+            <Button fx:id="seeListUsers_button" layoutX="337.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Users" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="337.0" layoutY="66.0" prefHeight="9.0" prefWidth="305.0" style="-fx-background-color: #2E1114;" />
          </children>
       </AnchorPane>
    </children>
