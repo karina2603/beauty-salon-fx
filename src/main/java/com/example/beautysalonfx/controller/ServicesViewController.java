@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Service;
 import javafx.collections.FXCollections;
@@ -16,8 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ServicesViewController {
-
-    private ObservableList<Service> servicesData = FXCollections.observableArrayList();
 
     @FXML
     private ResourceBundle resources;
@@ -58,19 +57,8 @@ public class ServicesViewController {
     @FXML
     void initialize() {
 
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            servicesData = databaseHandler.getServices();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<Service, Integer>("id_service"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Service, String>("name"));
-        request_timeColumn.setCellValueFactory(new PropertyValueFactory<Service, Double>("request_time"));
-        costColumn.setCellValueFactory(new PropertyValueFactory<Service, Integer>("cost"));
-
-        tableServices.setItems(servicesData);
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeServiceTable(tableServices, idColumn, nameColumn, request_timeColumn, costColumn);
 
         aboutUs_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
@@ -102,28 +90,5 @@ public class ServicesViewController {
             sceneHandler.openNewScene("/listUserRecordsView.fxml", listRecords_button);
         });
     }
-
-
-
-//    private void openNewScene(String window, Button button) {
-//        //button.getScene().getWindow().hide();
-//
-//
-//        URL fxmlLocation = getClass().getResource(window);
-//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
-//
-//        try {
-//            loader.load();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Parent root = loader.getRoot();
-////        Stage stage = new Stage();
-////        stage.setScene(new Scene(root));
-////        stage.showAndWait();
-//        button.getScene().setRoot(root);
-//    }
 
 }

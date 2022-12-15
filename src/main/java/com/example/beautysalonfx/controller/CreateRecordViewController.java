@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Service;
 import javafx.collections.FXCollections;
@@ -51,7 +52,8 @@ public class CreateRecordViewController {
     @FXML
     void initialize() {
 
-        initializeComboBox();
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeServiceComboBox(services_list, "all");
 
         findRecords_button.setOnAction(event -> {
             Const service = new Const(services_list.getValue());
@@ -92,43 +94,5 @@ public class CreateRecordViewController {
 
 
     }
-
-    private void initializeComboBox() {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            ObservableList<Service> services = databaseHandler.getServices();
-            ObservableList<String> services_name = FXCollections.observableArrayList();
-            for (Service service : services) {
-                services_name.add(service.getName());
-            }
-            services_name.add("all");
-
-            services_list.setItems(services_name);
-            services_list.setValue("all");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-//    private void openNewScene(String window, Button button) {
-//        //button.getScene().getWindow().hide();
-//
-//
-//        URL fxmlLocation = getClass().getResource(window);
-//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
-//
-//        try {
-//            loader.load();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Parent root = loader.getRoot();
-////        Stage stage = new Stage();
-////        stage.setScene(new Scene(root));
-////        stage.showAndWait();
-//        button.getScene().setRoot(root);
-//    }
 
 }

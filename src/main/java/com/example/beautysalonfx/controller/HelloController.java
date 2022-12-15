@@ -64,27 +64,6 @@ public class HelloController {
         });
     }
 
-//    private void openNewScene(String window) {
-//        //signUp_button.getScene().getWindow().hide();
-//
-//
-//        URL fxmlLocation = getClass().getResource(window);
-//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
-//
-//        try {
-//            loader.load();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Parent root = loader.getRoot();
-////        Stage stage = new Stage();
-////        stage.setScene(new Scene(root));
-////        stage.showAndWait();
-//        signUp_button.getScene().setRoot(root);
-//    }
-
     private void loginUser(String loginText, String passwordText) throws SQLException, ClassNotFoundException {
         DatabaseHandler dbHandler = new DatabaseHandler();
         User user = new User();

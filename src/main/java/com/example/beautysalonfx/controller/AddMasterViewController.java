@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Service;
 import javafx.collections.FXCollections;
@@ -49,7 +50,8 @@ public class AddMasterViewController {
     @FXML
     void initialize() {
 
-        initializeComboBox();
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeServiceComboBox(services_list, "all");
 
         addMaster_button.setOnAction(event -> {
             DatabaseHandler databaseHandler = new DatabaseHandler();
@@ -93,21 +95,5 @@ public class AddMasterViewController {
         });
     }
 
-    private void initializeComboBox() {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            ObservableList<Service> services = databaseHandler.getServices();
-            ObservableList<String> services_name = FXCollections.observableArrayList();
-            for (Service service : services) {
-                services_name.add(service.getName());
-            }
-            services_name.add("all");
-
-            services_list.setItems(services_name);
-            services_list.setValue("all");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }

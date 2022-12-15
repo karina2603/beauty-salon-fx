@@ -82,7 +82,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="users_button" layoutX="337.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Users" textFill="WHITE">
+            <Button fx:id="users_button" layoutX="337.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Users" textFill="WHITE" underline="true">
                <font>
                   <Font size="14.0" />
                </font>

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Master;
 import com.example.beautysalonfx.entity.Service;
@@ -21,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListServicesViewController {
 
-    private ObservableList<Service> servicesData = FXCollections.observableArrayList();
+
 
     @FXML
     private ResourceBundle resources;
@@ -69,30 +70,10 @@ public class ListServicesViewController {
     void initialize() {
 
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            servicesData = databaseHandler.getServices();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeServiceTable(tableServices, idColumn, nameColumn, request_timeColumn, costColumn);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Service, Integer>("id_service"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Service, String>("name"));
-        request_timeColumn.setCellValueFactory(new PropertyValueFactory<Service, Double>("request_time"));
-        costColumn.setCellValueFactory(new PropertyValueFactory<Service, Integer>("cost"));
-
-        tableServices.setItems(servicesData);
-
-        TableView.TableViewSelectionModel<Service> selectionModel = tableServices.getSelectionModel();
-        selectionModel.selectedItemProperty().addListener(new ChangeListener<Service>(){
-
-            @Override
-            public void changed(ObservableValue<? extends Service> observableValue, Service service, Service t1) {
-                if(t1 != null) {
-                    Service newService = (Service) t1;
-                    Const idService =  new Const(newService.getId_service(), "service");
-                }
-            }
-        });
+        infoWorker.getServiceRow(tableServices);
 
         updateService_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();

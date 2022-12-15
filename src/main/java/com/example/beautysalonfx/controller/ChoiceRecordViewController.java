@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Record;
 import javafx.beans.value.ChangeListener;
@@ -20,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ChoiceRecordViewController {
 
-    private ObservableList<Record> recordsData = FXCollections.observableArrayList();
+//    private ObservableList<Record> recordsData = FXCollections.observableArrayList();
 
     @FXML
     private ResourceBundle resources;
@@ -70,32 +71,11 @@ public class ChoiceRecordViewController {
     @FXML
     void initialize() {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            recordsData = databaseHandler.getRecordsByName(Const.CHOOSEN_SERVICE);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeRecordsTableByService(tableRecords, idColumn, nameColumn, timeColumn,
+                                            dateColumn, name_masterColumn);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id_record"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("service_name"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        name_masterColumn.setCellValueFactory(new PropertyValueFactory<>("master_name"));
-
-        tableRecords.setItems(recordsData);
-
-        TableView.TableViewSelectionModel<Record> selectionModel = tableRecords.getSelectionModel();
-        selectionModel.selectedItemProperty().addListener(new ChangeListener<Record>() {
-            @Override
-            public void changed(ObservableValue<? extends Record> observableValue, Record record, Record t1) {
-                if (t1 != null) {
-                    Record newRecord = (Record) t1;
-                    Const idRecord = new Const(newRecord.getId_record(), "record");
-
-                }
-            }
-        });
-
+        infoWorker.getRecordRow(tableRecords);
 
         addRecord_button.setOnAction(event -> {
             try {

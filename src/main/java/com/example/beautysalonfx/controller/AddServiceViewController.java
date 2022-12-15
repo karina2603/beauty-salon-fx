@@ -1,17 +1,14 @@
 package com.example.beautysalonfx.controller;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.example.beautysalonfx.NumberTextField;
 import com.example.beautysalonfx.animations.Shake;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Master;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,7 +57,8 @@ public class AddServiceViewController {
     @FXML
     void initialize() {
 
-        initializeMasterComboBox();
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeMasterComboBox(masters_list);
 
         addService_button.setOnAction(event -> {
 
@@ -118,21 +116,6 @@ public class AddServiceViewController {
 
             sceneHandler.openNewScene("/listServicesView.fxml", services_button);
         });
-    }
-
-    private void initializeMasterComboBox() {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            ObservableList<Master> masters = databaseHandler.getMasters();
-            ObservableList<String> masters_name = FXCollections.observableArrayList();
-            for (Master master : masters) {
-                masters_name.add(master.getName());
-            }
-
-            masters_list.setItems(masters_name);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private boolean validate(String text) {

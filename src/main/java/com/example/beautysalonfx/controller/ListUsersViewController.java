@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Record;
 import com.example.beautysalonfx.entity.Service;
@@ -21,8 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListUsersViewController {
-
-    private ObservableList<User> usersData = FXCollections.observableArrayList();
 
     @FXML
     private Button aboutUs_button;
@@ -67,31 +66,11 @@ public class ListUsersViewController {
     void initialize() {
 
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
 
-            usersData = databaseHandler.getUsers();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeUserTable(tableUsers, idColumn, nameColumn, roleColumn, enabledColumn);
+        infoWorker.getUserRow(tableUsers);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
-        roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
-        enabledColumn.setCellValueFactory(new PropertyValueFactory<>("enabled"));
-
-        tableUsers.setItems(usersData);
-
-        TableView.TableViewSelectionModel<User> selectionModel = tableUsers.getSelectionModel();
-        selectionModel.selectedItemProperty().addListener(new ChangeListener<User>(){
-
-            @Override
-            public void changed(ObservableValue<? extends User> observableValue, User service, User t1) {
-                if(t1 != null) {
-                    User user = (User) t1;
-                    Const id = new Const(Integer.parseInt(String.valueOf(user.getId())), "workuser");
-                }
-            }
-        });
 
         deleteUser_button.setOnAction(event -> {
             try {

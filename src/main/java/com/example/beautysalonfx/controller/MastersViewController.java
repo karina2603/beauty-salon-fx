@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Master;
 import com.example.beautysalonfx.entity.Service;
@@ -19,8 +20,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MastersViewController {
-
-    private ObservableList<Master> mastersData = FXCollections.observableArrayList();
 
     @FXML
     private Button aboutUs_button;
@@ -49,17 +48,8 @@ public class MastersViewController {
     @FXML
     void initialize() {
 
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            mastersData = databaseHandler.getMasters();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<Master, Integer>("id_master"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Master, String>("name"));
-
-        tableMasters.setItems(mastersData);
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeMasterTable(tableMasters, idColumn, nameColumn);
 
         aboutUs_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
@@ -91,26 +81,5 @@ public class MastersViewController {
             sceneHandler.openNewScene("/listUserRecordsView.fxml", listRecords_button);
         });
     }
-
-//    private void openNewScene(String window, Button button) {
-//        //button.getScene().getWindow().hide();
-//
-//
-//        URL fxmlLocation = getClass().getResource(window);
-//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
-//
-//        try {
-//            loader.load();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Parent root = loader.getRoot();
-////        Stage stage = new Stage();
-////        stage.setScene(new Scene(root));
-////        stage.showAndWait();
-//        button.getScene().setRoot(root);
-//    }
 
 }

@@ -2,6 +2,7 @@ package com.example.beautysalonfx.controller;
 
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Master;
 import com.example.beautysalonfx.entity.Record;
@@ -15,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListUserRecordsViewController {
 
-    private ObservableList<Record> recordsData = FXCollections.observableArrayList();
+
 
     @FXML
     private Button aboutUs_button;
@@ -53,22 +54,9 @@ public class ListUserRecordsViewController {
     @FXML
     void initialize() {
 
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            recordsData = databaseHandler.getUserRecords(Const.USER_ID);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id_record"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("service_name"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        name_masterColumn.setCellValueFactory(new PropertyValueFactory<>("master_name"));
-
-        tableUserRecords.setItems(recordsData);
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeRecordTableByUser(tableUserRecords, idColumn, nameColumn, timeColumn,
+                                                dateColumn, name_masterColumn);
 
         aboutUs_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
@@ -100,25 +88,4 @@ public class ListUserRecordsViewController {
             sceneHandler.openNewScene("/createRecordView.fxml", createRecord_button);
         });
     }
-
-//    private void openNewScene(String window, Button button) {
-//        //button.getScene().getWindow().hide();
-//
-//
-//        URL fxmlLocation = getClass().getResource(window);
-//        FXMLLoader loader = new FXMLLoader(fxmlLocation);
-////            loader.setLocation(getClass().getResource("resources/com.example.myfirstapp.signUp.fxml"));
-//
-//        try {
-//            loader.load();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Parent root = loader.getRoot();
-////        Stage stage = new Stage();
-////        stage.setScene(new Scene(root));
-////        stage.showAndWait();
-//        button.getScene().setRoot(root);
-//    }
 }

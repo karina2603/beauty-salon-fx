@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Master;
 import javafx.beans.value.ChangeListener;
@@ -20,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListMastersViewController {
 
-    private ObservableList<Master> mastersData = FXCollections.observableArrayList();
+
 
     @FXML
     private ResourceBundle resources;
@@ -57,24 +58,11 @@ public class ListMastersViewController {
 
     @FXML
     void initialize() {
-
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            mastersData = databaseHandler.getMasters();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        TableView.TableViewSelectionModel<Master> selectionModel = tableMasters.getSelectionModel();
-        selectionModel.selectedItemProperty().addListener(new ChangeListener<Master>(){
 
-            @Override
-            public void changed(ObservableValue<? extends Master> observableValue, Master master, Master t1) {
-                if(t1 != null) {
-                    Master newMaster = (Master) t1;
-                    Const idMaster =  new Const(newMaster.getId_master(), "master");
-                }
-            }
-        });
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeMasterTable(tableMasters, idColumn, nameColumn);
+        infoWorker.getMasterRow(tableMasters);
 
         deleteMaster_button.setOnAction(event -> {
 
@@ -89,10 +77,6 @@ public class ListMastersViewController {
             }
         });
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Master, Integer>("id_master"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Master, String>("name"));
-
-        tableMasters.setItems(mastersData);
 
         addMaster_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
