@@ -16,9 +16,6 @@ public class AdminViewController {
     private URL location;
 
     @FXML
-    private Button aboutUs_button;
-
-    @FXML
     private Button addMaster_button;
 
     @FXML
@@ -29,9 +26,6 @@ public class AdminViewController {
 
     @FXML
     private Button masters_button;
-
-    @FXML
-    private Button schedule_button;
 
     @FXML
     private Button seeListUsers_button;
@@ -63,6 +57,18 @@ public class AdminViewController {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/listUsersView.fxml", seeListUsers_button);
+        });
+
+        masters_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listMastersView.fxml", masters_button);
+        });
+
+        services_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listServicesView.fxml", services_button);
         });
     }
 

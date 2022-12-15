@@ -58,6 +58,22 @@ public class DatabaseHandler extends Configs{
         return resSet;
     }
 
+    public User getUser(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "SELECT * FROM Users " +
+                        "WHERE id = " + id
+        );
+        ResultSet result = statement.executeQuery();
+        User user = new User();
+        while (result.next()) {
+            user.setLogin(result.getString("username"));
+            user.setRole(result.getString("role"));
+            user.setEnabled(result.getInt("enabled"));
+        }
+        return user;
+    }
+
     public ObservableList<Service> getServices() throws Exception {
         try {
             Connection conn = getDbConnection();
@@ -76,6 +92,30 @@ public class DatabaseHandler extends Configs{
                 list.add(service);
             }
             return list;
+
+        } catch (Exception e)  {
+
+        }
+        return null;
+    }
+
+    public Service getService() throws Exception {
+        try {
+            Connection conn = getDbConnection();
+            PreparedStatement statement = conn.prepareStatement("" +
+                    "SELECT * FROM Services " +
+                    "WHERE id_service = " + Const.SERVICE_ID);
+            ResultSet result = statement.executeQuery();
+            Service service = new Service();
+            while (result.next()) {
+
+                service.setId_service(result.getInt("id_service"));
+                service.setName(result.getString("name"));
+                service.setRequest_time(result.getDouble("request_time"));
+                service.setCost(result.getInt("cost"));
+                break;
+            }
+            return service;
 
         } catch (Exception e)  {
 
@@ -210,6 +250,94 @@ public class DatabaseHandler extends Configs{
                 "UPDATE Records " +
                         "SET status = 1, user_id = " + Const.USER_ID +
                         " WHERE id_record = " + id_record
+        );
+        int x = statement.executeUpdate();
+//        System.out.println(x);
+    }
+
+    public void updateService(String name, double request_time, int cost) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "UPDATE Services " +
+                        "SET name = \'" + name + "\', request_time =" +
+                        request_time + ", cost = " + cost +
+                        " WHERE id_service = " + Const.SERVICE_ID
+        );
+        int x = statement.executeUpdate();
+//        System.out.println(x);
+    }
+
+    public void updateUser(int id, String name, String role, int enabled) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "UPDATE Users " +
+                        "SET username = \'" + name + "\', role = \'" +
+                        role + "\', enabled = " + enabled +
+                        " WHERE id = " + id
+        );
+        int x = statement.executeUpdate();
+//        System.out.println(x);
+    }
+
+    public void addMaster(String name) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "INSERT Masters (name) " +
+                        "VALUES (\'" + name +
+                        "\') "
+        );
+        int x = statement.executeUpdate();
+        System.out.println(x);
+    }
+
+    public void addRecord (String service_name, String master_name, String date, String time) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "INSERT Records (service_name, master_name, date, time, status) " +
+                        "VALUES (\'" + service_name + "\', \'" + master_name + "\', \'" +
+                         date + "\', \'" + time +
+                        "\', 0) "
+        );
+        int x = statement.executeUpdate();
+        System.out.println(x);
+    }
+
+    public void addService(String name, double request_time, int cost) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "INSERT Services (name, request_time, cost) " +
+                        "VALUES (\'" + name + "\', " + request_time + ", " + cost +
+                        ") "
+        );
+        int x = statement.executeUpdate();
+        System.out.println(x);
+    }
+
+    public void deleteMaster(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "DELETE FROM Masters " +
+                        "WHERE id_master = " + id
+        );
+        int x = statement.executeUpdate();
+        System.out.println(x);
+    }
+
+    public void deleteService(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "DELETE FROM Services " +
+                        "WHERE id_service = " + id
+        );
+        int x = statement.executeUpdate();
+        System.out.println(x);
+    }
+
+    public void deleteUser(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "DELETE FROM Users " +
+                        "WHERE id = " + id
         );
         int x = statement.executeUpdate();
         System.out.println(x);

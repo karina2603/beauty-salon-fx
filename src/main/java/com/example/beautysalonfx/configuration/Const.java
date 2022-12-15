@@ -13,11 +13,22 @@ public class Const {
     public static String CHOOSEN_SERVICE;
 
     public static int RECORD_ID;
+    public static int MASTER_ID;
+
+    public static int WORK_USER_ID;
+
+    public static int SERVICE_ID;
     public Const(int id, String name) {
         if (name.equals("user")) {
             this.USER_ID = id;
         } else if (name.equals("record")) {
             this.RECORD_ID = id;
+        } else if (name.equals("master")) {
+            this.MASTER_ID = id;
+        } else if (name.equals("service")) {
+            this.SERVICE_ID = id;
+        } else if (name.equals("workuser")) {
+            this.WORK_USER_ID = id;
         }
     }
 

@@ -1,25 +1,18 @@
 package com.example.beautysalonfx.controller;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.example.beautysalonfx.NumberTextField;
 import com.example.beautysalonfx.animations.Shake;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
 import com.example.beautysalonfx.configuration.SceneHandler;
-import com.example.beautysalonfx.entity.Master;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.beautysalonfx.entity.Service;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class AddServiceViewController {
+public class UpdateServiceViewController {
 
     @FXML
     private ResourceBundle resources;
@@ -43,31 +36,34 @@ public class AddServiceViewController {
     private Button masters_button;
 
     @FXML
-    private ComboBox<String> masters_list;
+    private TextField name_field;
 
     @FXML
-    private TextField nameService_field;
-
-    @FXML
-    private TextField requestRime_field;
-
-    @FXML
-    private Button seeListUsers_button;
+    private TextField requestTime_field;
 
     @FXML
     private Button services_button;
 
     @FXML
+    private Button updateService_button;
+
+    @FXML
+    private Button users_button;
+
+    @FXML
     void initialize() {
 
-        initializeMasterComboBox();
+        try {
+            initializeFields();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        addService_button.setOnAction(event -> {
-
-            if (validate(requestRime_field.getText().trim())) {
+        updateService_button.setOnAction(event -> {
+            if (validate(requestTime_field.getText().trim())) {
 
             } else {
-                Shake shake = new Shake(requestRime_field);
+                Shake shake = new Shake(requestTime_field);
                 shake.playAnim();
             }
 
@@ -77,10 +73,11 @@ public class AddServiceViewController {
                 shake.playAnim();
             }
 
-            if (validate(cost_field.getText().trim()) && validate(requestRime_field.getText().trim())) {
+            if (validate(cost_field.getText().trim()) && validate(requestTime_field.getText().trim())) {
                 DatabaseHandler databaseHandler = new DatabaseHandler();
+
                 try {
-                    databaseHandler.addService(nameService_field.getText().trim(), Double.parseDouble(requestRime_field.getText().trim()), Integer.parseInt(cost_field.getText()));
+                    databaseHandler.updateService(name_field.getText(), Double.parseDouble(requestTime_field.getText()), Integer.parseInt(cost_field.getText()));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {
@@ -101,10 +98,16 @@ public class AddServiceViewController {
             sceneHandler.openNewScene("/addRecordView.fxml", addRecord_button);
         });
 
-        seeListUsers_button.setOnAction(event -> {
+        addService_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
-            sceneHandler.openNewScene("/listUsersView.fxml", seeListUsers_button);
+            sceneHandler.openNewScene("/addServiceView.fxml", addService_button);
+        });
+
+        users_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listUsersView.fxml", users_button);
         });
 
         masters_button.setOnAction(event -> {
@@ -120,23 +123,16 @@ public class AddServiceViewController {
         });
     }
 
-    private void initializeMasterComboBox() {
+    private void initializeFields() throws Exception {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        try {
-            ObservableList<Master> masters = databaseHandler.getMasters();
-            ObservableList<String> masters_name = FXCollections.observableArrayList();
-            for (Master master : masters) {
-                masters_name.add(master.getName());
-            }
+        Service service = databaseHandler.getService();
 
-            masters_list.setItems(masters_name);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        name_field.setText(service.getName());
+        requestTime_field.setText(String.valueOf(service.getRequest_time()));
+        cost_field.setText(String.valueOf(service.getCost()));
     }
 
     private boolean validate(String text) {
         return text.matches("[0-9]*");
     }
-
 }

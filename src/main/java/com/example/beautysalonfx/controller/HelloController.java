@@ -97,11 +97,12 @@ public class HelloController {
         while (result.next()) {
             counter++;
             user.setRole(result.getString("role"));
+            user.setEnabled(result.getInt("enabled"));
             Const user_id = new Const(result.getInt("id"), "user");
             break;
         }
 
-        if (counter > 0) {
+        if (counter > 0 && user.getEnabled() == 1) {
             if (user.getRole().equals("user")) {
                 SceneHandler sceneHandler = new SceneHandler();
 

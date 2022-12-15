@@ -48,12 +48,7 @@
                         <TableColumn fx:id="nameColumn" prefWidth="378.0" text="Name" />
                      </columns>
                   </TableView>
-                  <Button fx:id="updateMaster_button" layoutX="320.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Update" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="deleteMaster_button" layoutX="501.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Delete" textFill="WHITE">
+                  <Button fx:id="deleteMaster_button" layoutX="429.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Delete" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

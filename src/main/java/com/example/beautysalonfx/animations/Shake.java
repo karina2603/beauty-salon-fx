@@ -11,8 +11,9 @@ public class Shake {
         tt = new TranslateTransition(Duration.millis(70),node);
         tt.setFromX(0f);
         tt.setByX(10f);
-        tt.setCycleCount(3);
         tt.setAutoReverse(true);
+        tt.setCycleCount(3);
+
     }
 
     public void playAnim() {

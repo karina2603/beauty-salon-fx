@@ -1,12 +1,17 @@
 package com.example.beautysalonfx.controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
 import com.example.beautysalonfx.configuration.SceneHandler;
 import com.example.beautysalonfx.entity.Record;
+import com.example.beautysalonfx.entity.Service;
 import com.example.beautysalonfx.entity.User;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -50,9 +55,6 @@ public class ListUsersViewController {
     private TableColumn<User, String> roleColumn;
 
     @FXML
-    private Button schedule_button;
-
-    @FXML
     private Button services_button;
 
     @FXML
@@ -79,6 +81,35 @@ public class ListUsersViewController {
 
         tableUsers.setItems(usersData);
 
+        TableView.TableViewSelectionModel<User> selectionModel = tableUsers.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<User>(){
+
+            @Override
+            public void changed(ObservableValue<? extends User> observableValue, User service, User t1) {
+                if(t1 != null) {
+                    User user = (User) t1;
+                    Const id = new Const(Integer.parseInt(String.valueOf(user.getId())), "workuser");
+                }
+            }
+        });
+
+        deleteUser_button.setOnAction(event -> {
+            try {
+                databaseHandler.deleteUser(Const.WORK_USER_ID);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        updateUser_button.setOnAction(event -> {
+
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/updateUserView.fxml", updateUser_button);
+        });
+
         addMaster_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
@@ -95,6 +126,18 @@ public class ListUsersViewController {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/addServiceView.fxml", addService_button);
+        });
+
+        masters_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listMastersView.fxml", masters_button);
+        });
+
+        services_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listServicesView.fxml", services_button);
         });
     }
 
