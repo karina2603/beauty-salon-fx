@@ -27,6 +27,11 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Button fx:id="logOut_button" layoutX="63.0" layoutY="251.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Log out" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
             <TextArea fx:id="textarea" editable="false" layoutX="229.0" layoutY="7.0" prefHeight="282.0" prefWidth="465.0" style="-fx-background-color: #83677B;" text="    Beauty Salon &quot;Whitesquare&quot; is a young and rapidly developing beauty salon that provides nail services. It was opened in the city of N in 2022. During his small time period of activity, he managed to win a large number of loyal and loyal customers.&#10;    The salon offers its customers professional nail care products from foreign manufacturers.&#10;    The beauty salon &quot;Whitesquare&quot; has a goal - to give its customers only the best, which is expressed in the use of advanced technology, in working only with professional cosmetic lines with a worldwide reputation.&#10;    The masters of the &quot;Whitesquare&quot; were trained in world-famous schools and academies: &quot;Dessange&quot;, &quot;Dolores&quot;, the international academy &quot;Goldwell&quot;, &quot;Ole House&quot;.&#10;    They treat their work here as creativity, so all the masters of the nail service of the &quot;Whitesquare&quot; constantly participate in contests, fashion shoots, shows, take prizes and develop their professionalism every day." wrapText="true" />

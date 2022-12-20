@@ -52,6 +52,9 @@ public class ListUserRecordsViewController {
     private TableColumn<Record, String> timeColumn;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
     void initialize() {
 
         InfoWorker infoWorker = new InfoWorker();
@@ -62,6 +65,11 @@ public class ListUserRecordsViewController {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/infoView.fxml", aboutUs_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         schedule_button.setOnAction(event -> {

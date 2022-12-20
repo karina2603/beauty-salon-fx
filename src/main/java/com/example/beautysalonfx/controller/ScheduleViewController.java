@@ -38,12 +38,20 @@ public class ScheduleViewController {
     private TextArea textarea;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
     void initialize() {
 
         aboutUs_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/infoView.fxml", aboutUs_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         services_button.setOnAction(event -> {

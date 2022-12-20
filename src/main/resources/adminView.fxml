@@ -33,6 +33,11 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
+                        <Button fx:id="logOut_button" layoutX="49.0" layoutY="255.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Log out" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
@@ -47,7 +52,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="services_button" layoutX="448.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
+            <Button fx:id="services_button" layoutX="495.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -58,6 +63,11 @@
                </font>
             </Button>
             <Button fx:id="seeListUsers_button" layoutX="337.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Users" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="records_button" layoutX="414.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Records" textFill="WHITE" underline="true">
                <font>
                   <Font size="14.0" />
                </font>

@@ -55,7 +55,19 @@ public class AddRecordViewController {
     private ComboBox<String> time_list;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
+    private Button records_button;
+
+    @FXML
     void initialize() {
+
+        records_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
+        });
 
         InfoWorker infoWorker = new InfoWorker();
         infoWorker.initializeServiceComboBox(services_list, "");
@@ -71,6 +83,11 @@ public class AddRecordViewController {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         addMaster_button.setOnAction(event -> {

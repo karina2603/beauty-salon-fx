@@ -40,11 +40,19 @@ public class InfoViewController {
     private TextArea textarea;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
     void initialize() {
         schedule_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/scheduleView.fxml", schedule_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         services_button.setOnAction(event -> {

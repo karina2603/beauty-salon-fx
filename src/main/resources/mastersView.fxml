@@ -30,6 +30,11 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
+                        <Button fx:id="logOut_button" layoutX="72.0" layoutY="251.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Log out" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                   <TableView fx:id="tableMasters" layoutX="233.0" layoutY="45.0" prefHeight="247.0" prefWidth="461.0">

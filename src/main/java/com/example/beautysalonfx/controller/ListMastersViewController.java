@@ -57,6 +57,12 @@ public class ListMastersViewController {
     private Button users_button;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
+    private Button records_button;
+
+    @FXML
     void initialize() {
         DatabaseHandler databaseHandler = new DatabaseHandler();
 
@@ -77,6 +83,16 @@ public class ListMastersViewController {
             }
         });
 
+        records_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
+        });
 
         addMaster_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();

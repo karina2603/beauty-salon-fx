@@ -6,17 +6,15 @@ import java.util.ResourceBundle;
 
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
-import com.example.beautysalonfx.entity.Service;
-import com.example.beautysalonfx.entity.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.beautysalonfx.entity.Record;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
-public class UpdateUserViewController {
+public class ListRecordsViewController {
 
     @FXML
     private ResourceBundle resources;
@@ -34,76 +32,87 @@ public class UpdateUserViewController {
     private Button addService_button;
 
     @FXML
-    private ComboBox<String> enabled_box;
+    private TableColumn<Record, String> dateColumn;
 
     @FXML
-    private Button masters_button;
+    private Button deleteRecord_button;
 
     @FXML
-    private TextField name_field;
-
-    @FXML
-    private ComboBox<String> role_box;
-
-    @FXML
-    private Button services_button;
-
-    @FXML
-    private Button updateUser_button;
-
-    @FXML
-    private Button users_button;
+    private TableColumn<Record, Integer> idColumn;
 
     @FXML
     private Button logOut_button;
 
     @FXML
-    private Button records_button;
+    private TableColumn<Record, String> masterNameColumn;
+
+    @FXML
+    private Button masters_button;
+
+    @FXML
+    private Button services_button;
+
+    @FXML
+    private TableColumn<Record, String> serviceNameColumn;
+
+    @FXML
+    private TableColumn<Record, Integer> statusColumn;
+
+    @FXML
+    private TableView<Record> tableRecords;
+
+    @FXML
+    private TableColumn<Record, String> timeColumn;
+
+    @FXML
+    private Button updateRecord_button;
+
+    @FXML
+    private TableColumn<Record, Integer> userIdColumn;
+
+    @FXML
+    private Button users_button;
 
     @FXML
     void initialize() {
 
-        initializeBox();
-        try {
-            initializeFields();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeRecordTable(tableRecords, idColumn, serviceNameColumn, timeColumn,
+                dateColumn, masterNameColumn, statusColumn, userIdColumn);
 
-        logOut_button.setOnAction(event -> {
-            SceneHandler sceneHandler = new SceneHandler();
-            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
-        });
-
-        records_button.setOnAction(event -> {
+        infoWorker.getRecordRow(tableRecords);
+        addMaster_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
-            sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
+            sceneHandler.openNewScene("/addMasterView.fxml", addMaster_button);
         });
 
-        updateUser_button.setOnAction(event -> {
+        updateRecord_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/updateRecordView.fxml", updateRecord_button);
+        });
+
+        deleteRecord_button.setOnAction(event -> {
             DatabaseHandler databaseHandler = new DatabaseHandler();
 
+            System.out.println(Const.RECORD_ID);
             try {
-                int enabled = 1;
-                if (enabled_box.getValue().equals("block")) {
-                    enabled = 0;
-                }
-                databaseHandler.updateUser(Const.WORK_USER_ID, name_field.getText(), role_box.getValue(), enabled);
+                databaseHandler.deleteRecord(Const.RECORD_ID);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+
             SceneHandler sceneHandler = new SceneHandler();
 
-            sceneHandler.openNewScene("/listUsersView.fxml", updateUser_button);
+            sceneHandler.openNewScene("/listRecordsView.fxml", deleteRecord_button);
         });
 
-        addMaster_button.setOnAction(event -> {
+        logOut_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
-
-            sceneHandler.openNewScene("/addMasterView.fxml", addMaster_button);
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         addRecord_button.setOnAction(event -> {
@@ -135,31 +144,7 @@ public class UpdateUserViewController {
 
             sceneHandler.openNewScene("/listServicesView.fxml", services_button);
         });
+
     }
-
-    private void initializeFields() throws Exception {
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        User user = databaseHandler.getUser(Const.WORK_USER_ID);
-
-        name_field.setText(user.getLogin());
-        if (user.getRole().equals("admin")) {
-            role_box.setValue("admin");
-        } else {
-            role_box.setValue("user");
-        }
-        if (user.getEnabled() == 0) {
-            enabled_box.setValue("block");
-        } else {
-            enabled_box.setValue("have access");
-        }
-    }
-
-    private void initializeBox() {
-        ObservableList<String> roles = FXCollections.observableArrayList("admin", "user");
-        role_box.setItems(roles);
-        ObservableList<String> access = FXCollections.observableArrayList("have access", "block");
-        enabled_box.setItems(access);
-    }
-
 
 }

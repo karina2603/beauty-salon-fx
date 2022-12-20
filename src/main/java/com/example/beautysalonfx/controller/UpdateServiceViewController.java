@@ -51,6 +51,12 @@ public class UpdateServiceViewController {
     private Button users_button;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
+    private Button records_button;
+
+    @FXML
     void initialize() {
 
         try {
@@ -58,6 +64,17 @@ public class UpdateServiceViewController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
+        });
+
+        records_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
+        });
 
         updateService_button.setOnAction(event -> {
             if (validate(requestTime_field.getText().trim())) {

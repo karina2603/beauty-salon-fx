@@ -34,6 +34,11 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
+                        <Button fx:id="logOut_button" layoutX="63.0" layoutY="251.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Log out" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                   <Label layoutX="427.0" layoutY="14.0" text="Service:" textFill="WHITE" underline="true">
@@ -76,7 +81,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="services_button" layoutX="448.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
+            <Button fx:id="services_button" layoutX="495.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Services" textFill="WHITE" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -91,7 +96,12 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <AnchorPane layoutX="342.0" layoutY="64.0" prefHeight="9.0" prefWidth="305.0" style="-fx-background-color: #2E1114;" />
+            <Button fx:id="records_button" layoutX="414.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #64485C;" text="Records" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="339.0" layoutY="63.0" prefHeight="9.0" prefWidth="305.0" style="-fx-background-color: #2E1114;" />
          </children>
       </AnchorPane>
    </children>

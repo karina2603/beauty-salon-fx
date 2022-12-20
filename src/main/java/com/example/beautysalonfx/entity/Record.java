@@ -7,17 +7,25 @@ public class Record {
     private int id_record;
     private String service_name;
     private String master_name;
-    private User user;
+    private int user_id;
     private String date;
     private String time;
-    private Status status;
+    private int status;
 
-    public User getUser() {
-        return user;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Record(String service, String master_name, String date, String time) {
@@ -25,7 +33,7 @@ public class Record {
         this.master_name = master_name;
         this.date = date;
         this.time = time;
-        this.status = Status.Free;
+        this.status = 0;
     }
 
     public Record() {

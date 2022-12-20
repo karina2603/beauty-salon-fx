@@ -21,8 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ChoiceRecordViewController {
 
-//    private ObservableList<Record> recordsData = FXCollections.observableArrayList();
-
     @FXML
     private ResourceBundle resources;
 
@@ -69,6 +67,9 @@ public class ChoiceRecordViewController {
     private TableColumn<Record, String> timeColumn;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
     void initialize() {
         DatabaseHandler databaseHandler = new DatabaseHandler();
         InfoWorker infoWorker = new InfoWorker();
@@ -86,6 +87,13 @@ public class ChoiceRecordViewController {
                 throw new RuntimeException(e);
             }
 
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/listUserRecordsView.fxml", addRecord_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         aboutUs_button.setOnAction(event -> {

@@ -46,6 +46,9 @@ public class MastersViewController {
     private TableView<Master> tableMasters;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
     void initialize() {
 
         InfoWorker infoWorker = new InfoWorker();
@@ -55,6 +58,11 @@ public class MastersViewController {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/infoView.fxml", aboutUs_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         schedule_button.setOnAction(event -> {

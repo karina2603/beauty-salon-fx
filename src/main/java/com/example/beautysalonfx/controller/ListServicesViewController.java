@@ -67,6 +67,12 @@ public class ListServicesViewController {
     private Button users_button;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
+    private Button records_button;
+
+    @FXML
     void initialize() {
 
         DatabaseHandler databaseHandler = new DatabaseHandler();
@@ -81,6 +87,12 @@ public class ListServicesViewController {
             sceneHandler.openNewScene("/updateServiceView.fxml", updateService_button);
         });
 
+        records_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
+        });
+
         deleteService_button.setOnAction(event -> {
 
 
@@ -92,6 +104,11 @@ public class ListServicesViewController {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         addMaster_button.setOnAction(event -> {

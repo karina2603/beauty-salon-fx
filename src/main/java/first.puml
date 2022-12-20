@@ -1,0 +1,496 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package "com.example.beautysalonfx.animations" {
+    class Shake {
+    -TranslateTransition tt
+    +Shake(Node node)
+    +void playAnim()
+    }
+}
+
+package "com.example.beautysalonfx.configuration" {
+    class Configs {
+        # String dbHost
+        # String dbPort
+        # String dbUser
+        # String dbPass
+        # String dbName
+    }
+    class Const {
+        + String USER_TABLE
+        +  String USER_USERNAME
+        +  String USER_PASSWORD
+        +  String USER_ROLE
+        +  String USER_ENABLED
+        +  int USER_ID;
+        +  String CHOOSEN_SERVICE;
+        +  int RECORD_ID;
+        +  int MASTER_ID;
+        +  int WORK_USER_ID;
+        +  int SERVICE_ID;
+        + Const(int id, String name)
+        + Const(String service)
+        + Const(int id)
+    }
+class DatabaseHandler extends Configs{
+
+        ~Connection dbConnection;
+
+        + Connection getDbConnection()
+        + void signUpUser(User user)
+        + ResultSet getUser(User user)
+        + ObservableList<Service> getServices()
+        + Service getService()
+        + ObservableList<Master> getMasters()
+        + ObservableList<Record> getUserRecords(int id)
+        + ObservableList<User> getUsers()
+        + ObservableList<Record> getRecordsByName(String choice)
+        + void updateRecord(int id_record)
+        + void updateService(String name, double request_time, int cost)
+        + void updateUser(int id, String name, String role, int enabled)
+        + void addMaster(String name)
+        + void addRecord (String service_name, String master_name, String date, String time)
+        + void addService(String name, double request_time, int cost)
+        + void deleteMaster(int id)
+        + void deleteService(int id)
+        + void deleteUser(int id)
+    }
+
+class InfoWorker {
+        + void initializeServiceComboBox(ComboBox<String> services_list, String choice)
+        + void initializeMasterComboBox(ComboBox<String> masters_list)
+        + void initializeTimeComboBox(ComboBox<String> time_list)
+        + void initializeRecordsTableByService(TableView<Record> tableRecords, TableColumn<Record, String> idColumn,
+                                           TableColumn<Record, String> nameColumn, TableColumn<Record, String> timeColumn,
+                                           TableColumn<Record, String> dateColumn, TableColumn<Record, String> name_masterColumn)
+        + void initializeRecordTableByUser(TableView<Record> tableUserRecords, TableColumn<Record, Integer> idColumn,
+                                                TableColumn<Record, String> nameColumn, TableColumn<Record, String> timeColumn,
+                                                TableColumn<Record, String> dateColumn, TableColumn<Record, String> name_masterColumn)
+        + void initializeMasterTable(TableView<Master> tableMasters, TableColumn<Master, Integer> idColumn,
+                                          TableColumn<Master, String> nameColumn)
+        + void initializeServiceTable(TableView<Service> tableServices, TableColumn<Service, Integer> idColumn,
+                                           TableColumn<Service, String> nameColumn, TableColumn<Service, Double> request_timeColumn,
+                                           TableColumn<Service, Integer> costColumn)
+        + void initializeUserTable(TableView<User> tableUsers, TableColumn<User, Integer> idColumn,
+                                        TableColumn<User, String> nameColumn, TableColumn<User, String> roleColumn,
+                                        TableColumn<User, Integer> enabledColumn)
+        + void getRecordRow(TableView<Record> tableRecords)
+        + void getMasterRow(TableView<Master> tableMasters)
+        + void getServiceRow(TableView<Service> tableServices)
+        + void getUserRow(TableView<User> tableUsers)
+    }
+
+    class SceneHandler {
+        + void openNewScene(String window, Button button)
+    }
+}
+
+package "com.example.beautysalonfx.controller" {
+    class AddMasterViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - Button masters_button
+        - TextField name_field
+        - Button seeListUsers_button
+        - Button services_button
+        - ComboBox<String> services_list
+        ~ void initialize()
+    }
+
+    class AddRecordViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - DatePicker date_picker
+        - Button masters_button
+        - ComboBox<String> masters_list
+        - Button seeListUsers_button
+        - Button services_button
+        - ComboBox<String> services_list
+        - ComboBox<String> time_list
+        ~ void initialize()
+    }
+
+    class AddServiceViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - TextField cost_field
+        - Button masters_button
+        - ComboBox<String> masters_list
+        - TextField nameService_field
+        - TextField requestRime_field
+        - Button seeListUsers_button
+        - Button services_button
+        ~ void initialize()
+        - boolean validate(String text)
+    }
+
+    class AdminViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - Button masters_button
+        - Button seeListUsers_button
+        - Button services_button
+        ~ void initialize()
+    }
+
+   class ChoiceRecordViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button aboutUs_button
+        - Button addRecord_button
+        - Button createRecord_button
+        - TableColumn<Record, String> dateColumn
+        - TableColumn<Record, String> idColumn
+        - Button listRecords_button
+        - Button masters_button
+        - TableColumn<Record, String> nameColumn
+        - TableColumn<Record, String> name_masterColumn
+        - Button schedule_button
+        - Button services_button
+        - TableView<Record> tableRecords
+        - TableColumn<Record, String> timeColumn
+        ~ void initialize()
+    }
+
+    class CreateRecordViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button aboutUs_button
+        - Button findRecords_button
+        - Button listRecords_button
+        - Button masters_button
+        - Button schedule_button
+        - Button services_button
+        - ComboBox<String> services_list
+        ~ void initialize()
+    }
+
+
+    class HelloController {
+        - ResourceBundle resources
+        - URL location
+        - TextField login_field
+        - PasswordField password_field
+        - Button signIn_button
+        - Button signUp_button
+        ~ void initialize()
+    }
+
+    class InfoViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button createRecord_button
+        - Button listRecords_button
+        - Button masters_button
+        - Button schedule_button
+        - Button services_button
+        - TextArea textarea
+        ~ void initialize()
+    }
+
+    class ListMastersViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - Button deleteMaster_button
+        - TableColumn<Master, Integer> idColumn
+        - TableColumn<Master, String> nameColumn
+        - Button services_button
+        - TableView<Master> tableMasters
+        - Button users_button
+        ~ void initialize()
+    }
+
+    class ListServicesViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - TableColumn<Service, Integer> costColumn
+        - Button deleteService_button
+        - TableColumn<Service, Integer> idColumn
+        - Button masters_button
+        - TableColumn<Service, String> nameColumn
+        - TableColumn<Service, Double> request_timeColumn
+        - TableView<Service> tableServices
+        - Button updateService_button
+        - Button users_button
+        ~ void initialize()
+    }
+
+    class ListUserRecordsViewController {
+        - Button aboutUs_button
+        - Button createRecord_button
+        - TableColumn<Record, String> dateColumn
+        - TableColumn<Record, Integer> idColumn
+        - Button masters_button
+        - TableColumn<Record, String> nameColumn
+        - TableColumn<Record, String> name_masterColumn
+        - Button schedule_button
+        - Button services_button
+        - TableView<Record> tableUserRecords
+        - TableColumn<Record, String> timeColumn
+        ~ void initialize()
+    }
+
+    class ListUsersViewController {
+        - Button aboutUs_button
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - Button deleteUser_button
+        - TableColumn<User, Integer> enabledColumn
+        - TableColumn<User, Integer> idColumn
+        - Button masters_button
+        - TableColumn<User, String> nameColumn
+        - TableColumn<User, String> roleColumn
+        - Button services_button
+        - TableView<User> tableUsers
+        - Button updateUser_button
+        ~ void initialize()
+    }
+
+    class MastersViewController {
+        - Button aboutUs_button
+        - Button createRecord_button
+        - TableColumn<Master, Integer> idColumn
+        - Button listRecords_button
+        - TableColumn<Master, String> nameColumn
+        - Button schedule_button
+        - Button services_button
+        - TableView<Master> tableMasters
+        ~ void initialize()
+    }
+
+    class ScheduleViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button aboutUs_button
+        - Button createRecord_button
+        - Button listRecords_button
+        - Button masters_button
+        - Button services_button
+        - TextArea textarea
+        ~ void initialize()
+    }
+
+    class ServicesViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button aboutUs_button
+        - TableColumn<Service, Integer> costColumn
+        - Button createRecord_button
+        - TableColumn<Service, Integer> idColumn
+        - Button listRecords_button
+        - Button masters_button
+        - TableColumn<Service, String> nameColumn
+        - TableColumn<Service, Double> request_timeColumn
+        - Button schedule_button
+        - TableView<Service> tableServices
+        ~ void initialize()
+    }
+
+    class SignUpController {
+        - ResourceBundle resources
+        - URL location
+        - PasswordField confirmPassword_field
+        - TextField login_field
+        - PasswordField password_field
+        - Button signUp_button
+        ~ void initialize()
+        - void signUpNewUser()
+    }
+
+    class UpdateServiceViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - TextField cost_field
+        - Button masters_button
+        - TextField name_field
+        - TextField requestTime_field
+        - Button services_button
+        - Button updateService_button
+        - Button users_button
+        ~ void initialize()
+        - void initializeFields()
+        - boolean validate(String text)
+    }
+
+    class UpdateUserViewController {
+        - ResourceBundle resources
+        - URL location
+        - Button addMaster_button
+        - Button addRecord_button
+        - Button addService_button
+        - ComboBox<String> enabled_box
+        - Button masters_button
+        - TextField name_field
+        - ComboBox<String> role_box
+        - Button services_button
+        - Button updateUser_button
+        - Button users_button
+        ~ void initialize()
+        - void initializeFields()
+        - void initializeBox()
+    }
+}
+
+package "com.example.beautysalonfx.entity" {
+    class Master {
+        - int id_master
+        - String name
+        - List<Service> services
+        + void addServiceToMaster(Service service)
+        + Master(String name, List<Service> services)
+        + Master(String name)
+        + Master()
+        + int getId_master()
+        + void setId_master(int id_master)
+        + String getName()
+        + void setName(String name)
+        + List<Service> getServices()
+        + void setServices(List<Service> services)
+        + boolean equals(Object o)
+        + int hashCode()
+    }
+    class Record {
+        - int id_record
+        - String service_name
+        - String master_name
+        - User user
+        - String date
+        - String time
+        - int status
+        + User getUser()
+        + void setUser(User user)
+        + Record(String service, String master_name, String date, String time)
+        + Record()
+        + int getId_record()
+        + void setId_record(int id_record)
+        + String getService_name()
+        + void setService_name(String service_name)
+        + String getMaster_name()
+        + void setMaster_name(String master_name)
+        + String getDate()
+        + void setDate(String date)
+        + String getTime()
+        + void setTime(String time)
+        + boolean equals(Object o)
+        + int hashCode()
+    }
+    class Service {
+        - int id_service
+        - String name
+        - double request_time
+        - int cost
+        - List<Master> masters
+        + void addMasterToService(Master master)
+        + Service(String name, double request_time, int cost)
+        + Service()
+        + int getId_service()
+        + void setId_service(int id_service)
+        + String getName()
+        + void setName(String name)
+        + double getRequest_time()
+        + void setRequest_time(double request_time)
+        + int getCost()
+        + void setCost(int cost)
+        + List<Master> getMasters()
+        + void setMasters(List<Master> masters)
+        + boolean equals(Object o)
+        + int hashCode()
+    }
+    class User {
+        - Long id
+        - String login
+        - String password
+        - String passwordConfirm
+        - String role
+        - int enabled
+        + User()
+        + User(String login, String password, String passwordConfirm)
+        + void setRole(String role)
+        + int getEnabled()
+        + void setEnabled(int enabled)
+        + Long getId()
+        + void setId(Long id)
+        + String getLogin()
+        + void setLogin(String username)
+        + String getPassword()
+        + void setPassword(String password)
+        + String getPasswordConfirm()
+        + void setPasswordConfirm(String passwordConfirm)
+        + String  getRole()
+        + boolean equals(Object o)
+        + int hashCode()
+    }
+}
+
+package "com.example.beautysalonfx"{
+    class Application extends javafx.application.Application {
+
+    + void start(Stage stage)
+    + void main(String[] args)
+    }
+}
+
+
+'addMasterViewController <.. DatabaseHandler
+'addMasterViewController <.. SceneHandler
+'
+'AddRecordViewController <.. InfoWorker
+AddRecordViewController <|.. DatabaseHandler
+'AddRecordViewController <.. SceneHandler
+
+AddServiceViewController <|.. Shake
+
+AdminViewController <|.. SceneHandler
+
+ChoiceRecordViewController <|.. Record
+
+CreateRecordViewController <|.. Const
+
+HelloController <|.. User
+
+InfoViewController <|.. SceneHandler
+
+ListMastersViewController <|.. Master
+
+ListServicesViewController <|.. Service
+
+ListUserRecordsViewController <|.. User
+
+ListUsersViewController <|.. User
+
+MastersViewController <|.. Master
+
+ScheduleViewController <|.. SceneHandler
+
+ServicesViewController <|.. Service
+
+SignUpController <|.. User
+
+UpdateServiceViewController <|.. Shake
+UpdateUserViewController <|.. User
+
+
+@enduml

@@ -50,6 +50,9 @@ public class CreateRecordViewController {
     private ComboBox<String> services_list;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
     void initialize() {
 
         InfoWorker infoWorker = new InfoWorker();
@@ -60,6 +63,11 @@ public class CreateRecordViewController {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/choiceRecordView.fxml", findRecords_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         aboutUs_button.setOnAction(event -> {

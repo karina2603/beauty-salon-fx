@@ -55,6 +55,9 @@ public class ServicesViewController {
     private TableView<Service> tableServices;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
     void initialize() {
 
         InfoWorker infoWorker = new InfoWorker();
@@ -64,6 +67,11 @@ public class ServicesViewController {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/infoView.fxml", aboutUs_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         schedule_button.setOnAction(event -> {

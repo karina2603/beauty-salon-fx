@@ -35,6 +35,21 @@ public class InfoWorker {
 //        return services_list;
     }
 
+    public void initializeUserIdComboBox(ComboBox<Long> userId_list) {
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        try {
+            ObservableList<User> users = databaseHandler.getUsers();
+            ObservableList<Long> users_list = FXCollections.observableArrayList();
+            for (User user : users) {
+                users_list.add( user.getId());
+            }
+
+            userId_list.setItems(users_list);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void initializeMasterComboBox(ComboBox<String> masters_list) {
         DatabaseHandler databaseHandler = new DatabaseHandler();
         try {
@@ -98,6 +113,31 @@ public class InfoWorker {
         name_masterColumn.setCellValueFactory(new PropertyValueFactory<>("master_name"));
 
         tableUserRecords.setItems(recordsData);
+    }
+
+    public void initializeRecordTable(TableView<Record> tableRecords, TableColumn<Record, Integer> idColumn,
+                                      TableColumn<Record, String> nameColumn, TableColumn<Record, String> timeColumn,
+                                      TableColumn<Record, String> dateColumn, TableColumn<Record, String> name_masterColumn,
+                                      TableColumn<Record, Integer> status, TableColumn<Record, Integer> user_id) {
+
+        ObservableList<Record> recordsData = FXCollections.observableArrayList();
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        try {
+            recordsData = databaseHandler.getRecords();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id_record"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("service_name"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        name_masterColumn.setCellValueFactory(new PropertyValueFactory<>("master_name"));
+        user_id.setCellValueFactory(new PropertyValueFactory<>("user_id"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+
+        tableRecords.setItems(recordsData);
     }
 
     public void initializeMasterTable(TableView<Master> tableMasters, TableColumn<Master, Integer> idColumn,

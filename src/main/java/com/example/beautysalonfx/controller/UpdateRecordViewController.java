@@ -2,21 +2,23 @@ package com.example.beautysalonfx.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import com.example.beautysalonfx.animations.Shake;
 import com.example.beautysalonfx.configuration.Const;
 import com.example.beautysalonfx.configuration.DatabaseHandler;
+import com.example.beautysalonfx.configuration.InfoWorker;
 import com.example.beautysalonfx.configuration.SceneHandler;
-import com.example.beautysalonfx.entity.Service;
+import com.example.beautysalonfx.entity.Record;
 import com.example.beautysalonfx.entity.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class UpdateUserViewController {
+public class UpdateRecordViewController {
 
     @FXML
     private ResourceBundle resources;
@@ -34,45 +36,73 @@ public class UpdateUserViewController {
     private Button addService_button;
 
     @FXML
-    private ComboBox<String> enabled_box;
-
-    @FXML
-    private Button masters_button;
-
-    @FXML
-    private TextField name_field;
-
-    @FXML
-    private ComboBox<String> role_box;
-
-    @FXML
-    private Button services_button;
-
-    @FXML
-    private Button updateUser_button;
-
-    @FXML
-    private Button users_button;
+    private DatePicker date_picker;
 
     @FXML
     private Button logOut_button;
 
     @FXML
+    private Button masters_button;
+
+    @FXML
+    private ComboBox<String> masters_list;
+
+    @FXML
     private Button records_button;
+
+    @FXML
+    private Button services_button;
+
+    @FXML
+    private ComboBox<String> services_list;
+
+    @FXML
+    private ComboBox<String> time_list;
+
+    @FXML
+    private Button updateRecord_button;
+
+    @FXML
+    private ComboBox<Long> userId_list;
+
+    @FXML
+    private Button users_button;
 
     @FXML
     void initialize() {
 
-        initializeBox();
+        InfoWorker infoWorker = new InfoWorker();
+        infoWorker.initializeServiceComboBox(services_list, "");
+        infoWorker.initializeMasterComboBox(masters_list);
+        infoWorker.initializeTimeComboBox(time_list);
+        infoWorker.initializeUserIdComboBox(userId_list);
+
         try {
             initializeFields();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        logOut_button.setOnAction(event -> {
+        updateRecord_button.setOnAction(event -> {
+            DatabaseHandler databaseHandler = new DatabaseHandler();
+
+            try {
+                if (String.valueOf(date_picker.getValue()).equals("")) {
+                    Shake shake = new Shake(date_picker);
+                    shake.playAnim();
+                } else {
+                    databaseHandler.updateRecord(services_list.getValue(), masters_list.getValue(), userId_list.getValue(),
+                            time_list.getValue(), String.valueOf(date_picker.getValue()));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
             SceneHandler sceneHandler = new SceneHandler();
-            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", updateRecord_button);
         });
 
         records_button.setOnAction(event -> {
@@ -81,29 +111,15 @@ public class UpdateUserViewController {
             sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
         });
 
-        updateUser_button.setOnAction(event -> {
-            DatabaseHandler databaseHandler = new DatabaseHandler();
-
-            try {
-                int enabled = 1;
-                if (enabled_box.getValue().equals("block")) {
-                    enabled = 0;
-                }
-                databaseHandler.updateUser(Const.WORK_USER_ID, name_field.getText(), role_box.getValue(), enabled);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            SceneHandler sceneHandler = new SceneHandler();
-
-            sceneHandler.openNewScene("/listUsersView.fxml", updateUser_button);
-        });
-
         addMaster_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/addMasterView.fxml", addMaster_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         addRecord_button.setOnAction(event -> {
@@ -139,27 +155,12 @@ public class UpdateUserViewController {
 
     private void initializeFields() throws Exception {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        User user = databaseHandler.getUser(Const.WORK_USER_ID);
+        Record record = databaseHandler.getRecord(Const.RECORD_ID);
 
-        name_field.setText(user.getLogin());
-        if (user.getRole().equals("admin")) {
-            role_box.setValue("admin");
-        } else {
-            role_box.setValue("user");
-        }
-        if (user.getEnabled() == 0) {
-            enabled_box.setValue("block");
-        } else {
-            enabled_box.setValue("have access");
-        }
+        masters_list.setValue(record.getMaster_name());
+        services_list.setValue(record.getService_name());
+        time_list.setValue(record.getTime());
+        userId_list.setValue((long) record.getUser_id());
     }
-
-    private void initializeBox() {
-        ObservableList<String> roles = FXCollections.observableArrayList("admin", "user");
-        role_box.setItems(roles);
-        ObservableList<String> access = FXCollections.observableArrayList("have access", "block");
-        enabled_box.setItems(access);
-    }
-
 
 }

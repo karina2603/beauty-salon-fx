@@ -178,6 +178,68 @@ public class DatabaseHandler extends Configs{
         return null;
     }
 
+    public ObservableList<Record> getRecords() {
+        try {
+            Connection conn = getDbConnection();
+            PreparedStatement statement = conn.prepareStatement("" +
+                    "SELECT id_record, service_name, master_name, date, time, status, user_id  FROM Records ");
+            ResultSet result = statement.executeQuery();
+
+            ObservableList<Record> list = FXCollections.observableArrayList();
+            while (result.next()) {
+                Record record = new Record();
+
+                record.setService_name(result.getString("service_name"));
+
+                record.setId_record(result.getInt("id_record"));
+
+                record.setMaster_name(result.getString("master_name"));
+
+                record.setDate(result.getString("date"));
+                record.setTime(result.getString("time"));
+                record.setStatus(result.getInt("status"));
+                record.setUser_id(result.getInt("user_id"));
+
+                list.add(record);
+            }
+            return list;
+
+        } catch (Exception e)  {
+
+        }
+        return null;
+    }
+
+    public Record getRecord(int id) {
+        try {
+            Connection conn = getDbConnection();
+            PreparedStatement statement = conn.prepareStatement("" +
+                    "SELECT id_record, service_name, master_name, date, time, user_id  FROM Records " +
+                    "WHERE id_record = " + id);
+            ResultSet result = statement.executeQuery();
+
+            Record record = new Record();
+            while (result.next()) {
+
+                record.setService_name(result.getString("service_name"));
+
+                record.setId_record(result.getInt("id_record"));
+
+                record.setMaster_name(result.getString("master_name"));
+
+                record.setDate(result.getString("date"));
+                record.setTime(result.getString("time"));
+                record.setUser_id(result.getInt("user_id"));
+
+            }
+            return record;
+
+        } catch (Exception e)  {
+
+        }
+        return null;
+    }
+
     public ObservableList<User> getUsers() {
         try {
             Connection conn = getDbConnection();
@@ -251,6 +313,36 @@ public class DatabaseHandler extends Configs{
                         "SET status = 1, user_id = " + Const.USER_ID +
                         " WHERE id_record = " + id_record
         );
+        int x = statement.executeUpdate();
+//        System.out.println(x);
+    }
+
+    public void updateRecord(String service, String master, Long user_id, String time, String date) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement;
+        if (user_id == 0) {
+            statement = conn.prepareStatement(
+                    "UPDATE Records " +
+                            "SET user_id = " + user_id +
+                            ", status = 0" +
+                            ", service_name = \'" + service +
+                            "\', master_name = \'" + master +
+                            "\', date = \'" + date +
+                            "\', time = \'" + time + "\'" +
+                    " WHERE id_record = " + Const.RECORD_ID
+            );
+        } else {
+            statement = conn.prepareStatement(
+                    "UPDATE Records " +
+                            "SET user_id = " + user_id +
+                            ", status = 1" +
+                            ", service_name = \'" + service +
+                            "\', master_name = \'" + master +
+                            "\', date = \'" + date +
+                            "\', time = \'" + time + "\'"+
+                    " WHERE id_record = " + Const.RECORD_ID
+            );
+        }
         int x = statement.executeUpdate();
 //        System.out.println(x);
     }
@@ -338,6 +430,16 @@ public class DatabaseHandler extends Configs{
         PreparedStatement statement = conn.prepareStatement(
                 "DELETE FROM Users " +
                         "WHERE id = " + id
+        );
+        int x = statement.executeUpdate();
+        System.out.println(x);
+    }
+
+    public void deleteRecord(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = getDbConnection();
+        PreparedStatement statement = conn.prepareStatement(
+                "DELETE FROM Records " +
+                        "WHERE id_record = " + id
         );
         int x = statement.executeUpdate();
         System.out.println(x);

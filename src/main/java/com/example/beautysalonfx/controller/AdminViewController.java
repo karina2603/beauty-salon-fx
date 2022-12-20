@@ -34,11 +34,29 @@ public class AdminViewController {
     private Button services_button;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
+    private Button records_button;
+
+    @FXML
     void initialize() {
+
+        records_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
+        });
+
         addMaster_button.setOnAction(event -> {
             SceneHandler sceneHandler = new SceneHandler();
 
             sceneHandler.openNewScene("/addMasterView.fxml", addMaster_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         addRecord_button.setOnAction(event -> {

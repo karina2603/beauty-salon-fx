@@ -30,6 +30,11 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
+                        <Button fx:id="logOut_button" layoutX="61.0" layoutY="251.0" mnemonicParsing="false" style="-fx-background-color: #83677B;" text="Log out" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                   <TextArea fx:id="textarea" editable="false" layoutX="229.0" layoutY="7.0" prefHeight="282.0" prefWidth="465.0" style="-fx-background-color: #83677B;" text="    Our salon tries to create for all visitors the maximum number of hours in which you can sign up for services. The peculiarity of our schedule is that you can sign up for the very last hour of our working day.&#10;&#10;    Our schedule: &#10;&#10;Weekdays: 09:00 - 20:00&#10;&#10;Weekend:  10:00 - 20:00" wrapText="true">

@@ -63,6 +63,12 @@ public class ListUsersViewController {
     private Button updateUser_button;
 
     @FXML
+    private Button logOut_button;
+
+    @FXML
+    private Button records_button;
+
+    @FXML
     void initialize() {
 
         DatabaseHandler databaseHandler = new DatabaseHandler();
@@ -80,6 +86,17 @@ public class ListUsersViewController {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+        });
+
+        records_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+
+            sceneHandler.openNewScene("/listRecordsView.fxml", records_button);
+        });
+
+        logOut_button.setOnAction(event -> {
+            SceneHandler sceneHandler = new SceneHandler();
+            sceneHandler.openNewScene("/hello-view.fxml", logOut_button);
         });
 
         updateUser_button.setOnAction(event -> {
